@@ -407,17 +407,17 @@
     <audio id="artist-audio-player" preload="none"></audio>
 
     <script>
-        // Solist Verileri ('photo' alanına fotoğraf, 'audio' alanına MP3 ses kesiti yolunu koyabilirsiniz)
+        // Solist Verileri ('photo' alanına fotoğraf, 'audio' alanına MP3 ses kesiti, 'pos' alanına kadraj hizası koyabilirsiniz)
         const artists = [
-            { id: "01", name: "Sevgim Yılmaz", handle: "@ssevgimyilmazofficial", url: "https://www.instagram.com/ssevgimyilmazofficial/", photo: "images/sevgim-yilmaz.jpg", audio: "audio/sevgim-yilmaz.mp3" },
-            { id: "02", name: "Pervin Pak", handle: "@pervinpak", url: "https://www.instagram.com/pervinpak/", photo: "images/pervin-pak.jpg", audio: "audio/pervin-pak.mp3" },
-            { id: "03", name: "Ömer Topçu", handle: "@omertopcuofficial", url: "https://www.instagram.com/omertopcuofficial/", photo: "images/omer-topcu.jpg", audio: "audio/omer-topcu.mp3" },
-            { id: "04", name: "Özge Özgür", handle: "@ozge_ozgurofficial", url: "https://www.instagram.com/ozge_ozgurofficial/", photo: "images/ozge-ozgur.jpg", audio: "audio/ozge-ozgur.mp3" },
-            { id: "05", name: "Nevra", handle: "@nevraofficiall", url: "https://www.instagram.com/nevraofficiall/", photo: "images/nevra.jpg", audio: "audio/nevra.mp3" },
-            { id: "06", name: "Pınar Ekinci", handle: "@pinarekinciofficial", url: "https://www.instagram.com/pinarekinciofficial/", photo: "images/pinar-ekinci.jpg", audio: "audio/pinar-ekinci.mp3" },
-            { id: "07", name: "Soner Aydın", handle: "@soneraydinofficial", url: "https://www.instagram.com/soneraydinofficial/", photo: "images/soner-aydin.jpg", audio: "audio/soner-aydin.mp3" },
-            { id: "08", name: "Cemil Yakut", handle: "@cemilyakutt", url: "https://www.instagram.com/cemilyakutt/", photo: "images/cemil-yakut.jpg", audio: "audio/cemil-yakut.mp3" },
-            { id: "09", name: "Anıl Petek Diva", handle: "@anilpetek_diva", url: "https://www.instagram.com/anilpetek_diva/", photo: "images/anil-petek-diva.jpg", audio: "audio/anil-petek-diva.mp3" }
+            { id: "01", name: "Sevgim Yılmaz", handle: "@ssevgimyilmazofficial", url: "https://www.instagram.com/ssevgimyilmazofficial/", photo: "images/sevgim-yilmaz.jpg", audio: "audio/sevgim-yilmaz.mp3", pos: "object-top" },
+            { id: "02", name: "Pervin Pak", handle: "@pervinpak", url: "https://www.instagram.com/pervinpak/", photo: "images/pervin-pak.jpg", audio: "audio/pervin-pak.mp3", pos: "object-top" },
+            { id: "03", name: "Ömer Topçu", handle: "@omertopcuofficial", url: "https://www.instagram.com/omertopcuofficial/", photo: "images/omer-topcu.jpg", audio: "audio/omer-topcu.mp3", pos: "object-top" },
+            { id: "04", name: "Özge Özgür", handle: "@ozge_ozgurofficial", url: "https://www.instagram.com/ozge_ozgurofficial/", photo: "images/ozge-ozgur.jpg", audio: "audio/ozge-ozgur.mp3", pos: "object-top" },
+            { id: "05", name: "Nevra", handle: "@nevraofficiall", url: "https://www.instagram.com/nevraofficiall/", photo: "images/nevra.jpg", audio: "audio/nevra.mp3", pos: "object-[center_22%]" },
+            { id: "06", name: "Pınar Ekinci", handle: "@pinarekinciofficial", url: "https://www.instagram.com/pinarekinciofficial/", photo: "images/pinar-ekinci.jpg", audio: "audio/pinar-ekinci.mp3", pos: "object-top" },
+            { id: "07", name: "Soner Aydın", handle: "@soneraydinofficial", url: "https://www.instagram.com/soneraydinofficial/", photo: "images/soner-aydin.jpg", audio: "audio/soner-aydin.mp3", pos: "object-top" },
+            { id: "08", name: "Cemil Yakut", handle: "@cemilyakutt", url: "https://www.instagram.com/cemilyakutt/", photo: "images/cemil-yakut.jpg", audio: "audio/cemil-yakut.mp3", pos: "object-top" },
+            { id: "09", name: "Anıl Petek Diva", handle: "@anilpetek_diva", url: "https://www.instagram.com/anilpetek_diva/", photo: "images/anil-petek-diva.jpg", audio: "audio/anil-petek-diva.mp3", pos: "object-top" }
         ];
 
         const grid = document.getElementById('artists-grid');
@@ -517,11 +517,11 @@
                     onmouseleave="stopArtistPreview('${artist.id}')"
                 >
                     <!-- Solist Portre Görsel Alanı -->
-                    <div class="relative h-64 sm:h-72 w-full bg-gradient-to-br from-zinc-900 via-[#1b1815] to-obsidian overflow-hidden">
+                    <div class="relative h-80 sm:h-[22rem] w-full bg-gradient-to-br from-zinc-900 via-[#1b1815] to-obsidian overflow-hidden">
                         <img 
                             src="${artist.photo}" 
                             alt="${artist.name}" 
-                            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                            class="w-full h-full object-cover ${artist.pos || 'object-top'} group-hover:scale-105 transition-transform duration-500"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                         />
                         <!-- Fotoğraf Henüz Eklenmediğinde Görünecek Prestijli Sahne Portresi -->
