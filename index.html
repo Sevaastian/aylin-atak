@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0c">
+    <title>Aylin Atak | Sanatçı Menajerlik & Sahne Organizasyon</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                    },
+                    colors: {
+                        obsidian: '#0a0a0c',
+                        charcoal: '#131317',
+                        gold: {
+                            300: '#f3d99b',
+                            400: '#e2bd6b',
+                            500: '#cfa042',
+                            600: '#a87c28',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #f4f4f6;
+            overflow-x: hidden;
+        }
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #f7e4b5 0%, #cfa042 50%, #f3d99b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stage-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(207, 160, 66, 0.16) 0%, rgba(10, 10, 12, 0) 68%);
+        }
+        .artist-card {
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .artist-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(207, 160, 66, 0.55);
+            box-shadow: 0 20px 45px -15px rgba(207, 160, 66, 0.18);
+        }
+        /* Müzik çalarken oynayan ekolayzer çubukları */
+        @keyframes eq-bar {
+            0%, 100% { height: 4px; }
+            50% { height: 15px; }
+        }
+        .eq-1 { animation: eq-bar 0.55s ease-in-out infinite; }
+        .eq-2 { animation: eq-bar 0.75s ease-in-out infinite 0.15s; }
+        .eq-3 { animation: eq-bar 0.45s ease-in-out infinite 0.3s; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold-500/30 selection:text-gold-300">
+
+    <!-- Üst Navigasyon -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-obsidian/85 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Marka / Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full border border-gold-500/40 bg-gold-500/10 flex items-center justify-center text-gold-400 group-hover:border-gold-400 transition-colors">
+                        <i class="fa-solid fa-microphone-lines text-sm"></i>
+                    </div>
+                    <div>
+                        <span class="block font-serif text-xl sm:text-2xl font-bold tracking-wider text-white">AYLİN ATAK</span>
+                        <span class="block text-[10px] tracking-[0.28em] text-gold-400 uppercase -mt-1">Menajerlik</span>
+                    </div>
+                </a>
+
+                <!-- Masaüstü Menü -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+                    <a href="#solistlerimiz" class="text-gold-400 hover:text-gold-300 transition-colors">Solistlerimiz</a>
+                    <a href="#hakkimizda" class="hover:text-white transition-colors">Vizyon & Hakkımızda</a>
+                    <a href="#hizmetler" class="hover:text-white transition-colors">Organizasyonlar</a>
+                    <a href="#iletisim" class="hover:text-white transition-colors">İletişim</a>
+                </nav>
+
+                <!-- Hızlı Aksiyon Butonu -->
+                <div class="flex items-center gap-3">
+                    <a href="#solistlerimiz" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-gold-500/40 text-gold-300 hover:bg-gold-500 hover:text-obsidian transition-all">
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <span>09 Solistimiz</span>
+                    </a>
+                    <a href="#iletisim" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gold-500 text-obsidian hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
+                        <span>Sahne Talebi</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero (Giriş) Bölümü -->
+    <section class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 stage-glow border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-gold-500/25 text-gold-300 text-xs tracking-[0.2em] uppercase mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse"></span>
+                Sanatçı Yönetimi & Sahne Planlama
+            </div>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-white mb-6">
+                Sahnenin Işığını <br class="hidden sm:block">
+                <span class="gold-text-gradient italic font-bold">Güçlü Seslerle</span> Buluşturuyoruz
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-zinc-400 text-base sm:text-lg leading-relaxed mb-10 font-light">
+                Aylin Atak Menajerlik; seçkin solist kadrosu, gala geceleri, konserler ve özel sahne organizasyonlarıyla müziğin birleştirici gücünü en prestijli sahnelere taşır.
+            </p>
+
+            <!-- Ana CTA Butonları (Instagram Biyografi Trafiği İçin Doğrudan Odak) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#solistlerimiz" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gold-500 text-obsidian font-semibold text-sm tracking-wide hover:bg-gold-400 transition-all shadow-xl shadow-gold-500/20">
+                    <span>Solistlerimizi Keşfedin</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+                <a href="https://wa.me/905422240045?text=Merhaba%20Aylin%20Han%C4%B1m%2C%20sahne%20ve%20menajerlik%20hizmetleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-white/[0.04] border border-white/15 text-white font-medium text-sm hover:border-gold-500/50 hover:bg-white/[0.07] transition-all">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                    <span>WhatsApp ile İletişime Geçin</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLİSTLERİMİZ BÖLÜMÜ (Instagram Vitrin & Sanatçı Kadrosu) -->
+    <section id="solistlerimiz" class="py-20 sm:py-28 scroll-mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Bölüm Başlığı ve Arama -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-gold-400 text-xs font-semibold tracking-[0.28em] uppercase block mb-2">Temsil Ettiğimiz Sanatçılar</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Solistlerimiz</h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-xl">
+                        Kartların üzerine gelerek veya dinle butonuna dokunarak sanatçılarımızın ses kesitlerini dinleyebilir, Instagram hesaplarını ziyaret edebilirsiniz.
+                    </p>
+                </div>
+
+                <!-- Hızlı İsim Arama -->
+                <div class="relative w-full md:w-72">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+                    <input 
+                        type="text" 
+                        id="artist-search" 
+                        placeholder="Solist ara..." 
+                        class="w-full pl-10 pr-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500/60 transition-colors"
+                    >
+                </div>
+            </div>
+
+            <!-- Solist Kartları Grid -->
+            <div id="artists-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Kartlar JavaScript ile dinamik olarak oluşturulacaktır -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Hakkımızda / Aylin Atak Vizyonu -->
+    <section id="hakkimizda" class="py-20 sm:py-24 bg-charcoal/60 border-y border-white/5 scroll-mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-gold-400 text-xs font-semibold tracking-[0.28em] uppercase">Menajerlik Yaklaşımımız</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                        Profesyonel Yönetim, <span class="gold-text-gradient italic">Kusursuz Sahne</span> Deneyimi
+                    </h2>
+                    <p class="text-zinc-300 leading-relaxed text-sm sm:text-base font-light">
+                        Aylin Atak liderliğinde yürütülen menajerlik çalışmalarımız; sanatçılarımızın kariyer planlamasından sahne koordinasyonuna, mekan ve organizasyon anlaşmalarından marka iş birliklerine kadar her süreci titizlikle yönetir.
+                    </p>
+                    <p class="text-zinc-400 leading-relaxed text-sm sm:text-base font-light">
+                        Güçlü iletişim ağımız ve seçkin solist kadromuzla, hem sanatçılarımız hem de organizasyon sahipleri için güvenilir, şeffaf ve yüksek standartlı bir köprü kuruyoruz.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                        <div>
+                            <span class="block font-serif text-3xl font-bold text-gold-400">09</span>
+                            <span class="text-xs text-zinc-400">Seçkin Solist</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-3xl font-bold text-gold-400">%100</span>
+                            <span class="text-xs text-zinc-400">Sahne Koordinasyonu</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-3xl font-bold text-gold-400">7/24</span>
+                            <span class="text-xs text-zinc-400">Booking Desteği</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ Kart: İmza Kartı -->
+                <div class="lg:col-span-6">
+                    <div class="relative p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#19181d] to-obsidian border border-gold-500/20 shadow-2xl">
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 mb-6">
+                            <i class="fa-solid fa-quote-left text-lg"></i>
+                        </div>
+                        <blockquote class="font-serif text-2xl sm:text-3xl italic text-zinc-100 leading-relaxed mb-6">
+                            "Müzik birleştirir; doğru sahne ve güçlü bir ses bir araya geldiğinde ise unutulmaz anılar doğar."
+                        </blockquote>
+                        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                            <div>
+                                <div class="font-semibold text-white tracking-wide">Aylin Atak</div>
+                                <div class="text-xs text-gold-400 tracking-widest uppercase mt-0.5">Kurucu & Sanatçı Menajeri</div>
+                            </div>
+                            <a href="https://www.instagram.com/aylinatakofficial/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs text-zinc-300 hover:text-gold-400 transition-colors">
+                                <i class="fa-brands fa-instagram text-base text-gold-400"></i>
+                                <span>@aylinatakofficial</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hizmetler / Organizasyon Alanları -->
+    <section id="hizmetler" class="py-20 sm:py-24 scroll-mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-gold-400 text-xs font-semibold tracking-[0.28em] uppercase block mb-2">Neler Yapıyoruz?</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Hizmet & Organizasyon Alanları</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-7 rounded-2xl bg-charcoal border border-white/10 hover:border-gold-500/40 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/25 flex items-center justify-center text-gold-400 mb-5">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Gala & Özel Davetler</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Kurumsal lansmanlar, özel geceler, düğün ve davet organizasyonları için konsepte en uygun solist planlaması.
+                    </p>
+                </div>
+
+                <div class="p-7 rounded-2xl bg-charcoal border border-white/10 hover:border-gold-500/40 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/25 flex items-center justify-center text-gold-400 mb-5">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Sahne & Mekan Programları</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Seçkin mekanlar, oteller ve eğlence merkezleri için düzenli sahne programları ve konser takvimi yönetimi.
+                    </p>
+                </div>
+
+                <div class="p-7 rounded-2xl bg-charcoal border border-white/10 hover:border-gold-500/40 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/25 flex items-center justify-center text-gold-400 mb-5">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Sanatçı Kariyer & PR Yönetimi</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Solistlerimizin marka iş birlikleri, medya görünürlüğü, repertuvar ve profesyonel temsil süreçlerinin yönetimi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İletişim & Sahne Rezervasyon Formu -->
+    <section id="iletisim" class="py-20 sm:py-24 bg-charcoal/60 border-t border-white/5 scroll-mt-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl bg-obsidian border border-gold-500/25 p-6 sm:p-12 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    
+                    <!-- Sol Bilgi Alanı -->
+                    <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+                        <div>
+                            <span class="text-gold-400 text-xs font-semibold tracking-[0.28em] uppercase block mb-2">Booking & İletişim</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">Sahne Talebi Oluşturun</h2>
+                            <p class="text-sm text-zinc-400 leading-relaxed">
+                                Etkinlik tarihinizi ve talep ettiğiniz solisti paylaşın; doğrudan WhatsApp üzerinden veya telefonla size hızlıca dönüş yapalım.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 pt-4 border-t border-white/10">
+                            <div class="flex items-center gap-3 text-sm text-zinc-300">
+                                <span class="w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                                    <i class="fa-solid fa-user-tie text-xs"></i>
+                                </span>
+                                <div>
+                                    <span class="block text-xs text-zinc-500">Menajer</span>
+                                    <span class="font-medium text-white">Aylin Atak</span>
+                                </div>
+                            </div>
+
+                            <a href="tel:+905422240045" class="flex items-center gap-3 text-sm text-zinc-300 hover:text-gold-400 transition-colors group">
+                                <span class="w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-obsidian transition-colors">
+                                    <i class="fa-solid fa-phone text-xs"></i>
+                                </span>
+                                <div>
+                                    <span class="block text-xs text-zinc-500">Doğrudan Telefon & WhatsApp</span>
+                                    <span class="font-medium text-white group-hover:text-gold-300">0542 224 00 45</span>
+                                </div>
+                            </a>
+
+                            <a href="https://www.instagram.com/aylinatakofficial/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm text-zinc-300 hover:text-gold-400 transition-colors group">
+                                <span class="w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-obsidian transition-colors">
+                                    <i class="fa-brands fa-instagram text-sm"></i>
+                                </span>
+                                <div>
+                                    <span class="block text-xs text-zinc-500">Resmi Instagram</span>
+                                    <span class="font-medium text-white group-hover:text-gold-300">@aylinatakofficial</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sağ Form Alanı -->
+                    <div class="lg:col-span-7">
+                        <form id="booking-form" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-zinc-400 mb-1.5">Adınız Soyadınız / Kurum</label>
+                                    <input type="text" id="sender-name" required placeholder="Örn: Ahmet Yılmaz" class="w-full px-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-zinc-400 mb-1.5">Telefon Numaranız</label>
+                                    <input type="tel" id="sender-phone" required placeholder="05XX XXX XX XX" class="w-full px-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-zinc-400 mb-1.5">Talep Edilen Solist</label>
+                                    <select id="selected-artist" class="w-full px-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white focus:outline-none focus:border-gold-500">
+                                        <option value="Genel Bilgi / Tüm Kadro">Genel Bilgi / Tüm Kadro</option>
+                                        <option value="Sevgim Yılmaz">01 - Sevgim Yılmaz</option>
+                                        <option value="Pervin Pak">02 - Pervin Pak</option>
+                                        <option value="Ömer Topçu">03 - Ömer Topçu</option>
+                                        <option value="Özge Özgür">04 - Özge Özgür</option>
+                                        <option value="Nevra">05 - Nevra</option>
+                                        <option value="Pınar Ekinci">06 - Pınar Ekinci</option>
+                                        <option value="Soner Aydın">07 - Soner Aydın</option>
+                                        <option value="Cemil Yakut">08 - Cemil Yakut</option>
+                                        <option value="Anıl Petek Diva">09 - Anıl Petek Diva</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-zinc-400 mb-1.5">Planlanan Tarih / Şehir</label>
+                                    <input type="text" id="event-date" placeholder="Örn: 15 Haziran / İstanbul" class="w-full px-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-zinc-400 mb-1.5">Etkinlik Detayları</label>
+                                <textarea rows="3" id="event-notes" placeholder="Organizasyon türü, mekan ve diğer detaylar..." class="w-full px-4 py-3 rounded-xl bg-charcoal border border-white/10 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-gold-500"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian font-semibold text-sm tracking-wide transition-all shadow-lg shadow-gold-500/20 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                                <span>WhatsApp ile Talebi Gönder</span>
+                            </button>
+
+                            <!-- Form Bildirim Kutusu -->
+                            <div id="form-feedback" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-center">
+                                WhatsApp mesajınız hazırlandı ve yönlendiriliyor. Teşekkür ederiz!
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alt Bilgi (Footer) -->
+    <footer class="py-10 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="font-serif text-xl font-bold tracking-wider text-white">AYLİN ATAK MENAJERLİK</div>
+            <p class="text-xs tracking-[0.25em] text-gold-400 uppercase mt-1">Müzik Birleştirir</p>
+            <div class="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-zinc-400">
+                <a href="tel:+905422240045" class="hover:text-gold-400 transition-colors">
+                    <i class="fa-solid fa-phone mr-1 text-gold-400"></i> 0542 224 00 45
+                </a>
+                <span class="text-zinc-700">•</span>
+                <a href="https://www.instagram.com/aylinatakofficial/" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 transition-colors">
+                    <i class="fa-brands fa-instagram mr-1 text-gold-400"></i> @aylinatakofficial
+                </a>
+            </div>
+            <p class="text-xs text-zinc-500 mt-4">© 2026 Aylin Atak Menajerlik & Organizasyon. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Sağ Alt Köşe Sabit WhatsApp Butonu -->
+    <a href="https://wa.me/905422240045?text=Merhaba%20Aylin%20Han%C4%B1m%2C%20menajerlik%20ve%20solistleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişime geç" class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-2xl shadow-emerald-950/60 flex items-center justify-center transition-transform hover:scale-105">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Solist Ses Önizleme Oynatıcısı -->
+    <audio id="artist-audio-player" preload="none"></audio>
+
+    <script>
+        // Solist Verileri ('photo' alanına fotoğraf, 'audio' alanına MP3 ses kesiti yolunu koyabilirsiniz)
+        const artists = [
+            { id: "01", name: "Sevgim Yılmaz", handle: "@ssevgimyilmazofficial", url: "https://www.instagram.com/ssevgimyilmazofficial/", photo: "images/sevgim-yilmaz.jpg", audio: "audio/sevgim-yilmaz.mp3" },
+            { id: "02", name: "Pervin Pak", handle: "@pervinpak", url: "https://www.instagram.com/pervinpak/", photo: "images/pervin-pak.jpg", audio: "audio/pervin-pak.mp3" },
+            { id: "03", name: "Ömer Topçu", handle: "@omertopcuofficial", url: "https://www.instagram.com/omertopcuofficial/", photo: "images/omer-topcu.jpg", audio: "audio/omer-topcu.mp3" },
+            { id: "04", name: "Özge Özgür", handle: "@ozge_ozgurofficial", url: "https://www.instagram.com/ozge_ozgurofficial/", photo: "images/ozge-ozgur.jpg", audio: "audio/ozge-ozgur.mp3" },
+            { id: "05", name: "Nevra", handle: "@nevraofficiall", url: "https://www.instagram.com/nevraofficiall/", photo: "images/nevra.jpg", audio: "audio/nevra.mp3" },
+            { id: "06", name: "Pınar Ekinci", handle: "@pinarekinciofficial", url: "https://www.instagram.com/pinarekinciofficial/", photo: "images/pinar-ekinci.jpg", audio: "audio/pinar-ekinci.mp3" },
+            { id: "07", name: "Soner Aydın", handle: "@soneraydinofficial", url: "https://www.instagram.com/soneraydinofficial/", photo: "images/soner-aydin.jpg", audio: "audio/soner-aydin.mp3" },
+            { id: "08", name: "Cemil Yakut", handle: "@cemilyakutt", url: "https://www.instagram.com/cemilyakutt/", photo: "images/cemil-yakut.jpg", audio: "audio/cemil-yakut.mp3" },
+            { id: "09", name: "Anıl Petek Diva", handle: "@anilpetek_diva", url: "https://www.instagram.com/anilpetek_diva/", photo: "images/anil-petek-diva.jpg", audio: "audio/anil-petek-diva.mp3" }
+        ];
+
+        const grid = document.getElementById('artists-grid');
+        const searchInput = document.getElementById('artist-search');
+        const audioPlayer = document.getElementById('artist-audio-player');
+        let currentPlayingId = null;
+
+        // Sanatçı adından baş harfleri çıkaran yardımcı fonksiyon
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+        }
+
+        // Ses Çalma / Durdurma Kontrolleri
+        function playArtistPreview(artistId) {
+            const artist = artists.find(a => a.id === artistId);
+            if (!artist || !artist.audio) return;
+
+            if (currentPlayingId !== artistId) {
+                audioPlayer.src = artist.audio;
+                audioPlayer.volume = 0.65;
+            }
+
+            audioPlayer.play().then(() => {
+                currentPlayingId = artistId;
+                updateAudioUI(artistId, true);
+            }).catch(() => {
+                // Tarayıcı ilk tıklamadan önce otomatik çalmayı engellerse sessizce yoksay
+            });
+        }
+
+        function stopArtistPreview(artistId) {
+            if (currentPlayingId === artistId) {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+                updateAudioUI(artistId, false);
+                currentPlayingId = null;
+            }
+        }
+
+        function toggleArtistPreview(event, artistId) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (currentPlayingId === artistId && !audioPlayer.paused) {
+                stopArtistPreview(artistId);
+            } else {
+                if (currentPlayingId) updateAudioUI(currentPlayingId, false);
+                playArtistPreview(artistId);
+            }
+        }
+
+        function updateAudioUI(artistId, isPlaying) {
+            const badge = document.getElementById(`eq-badge-${artistId}`);
+            const btn = document.getElementById(`play-btn-${artistId}`);
+            if (badge) {
+                badge.classList.toggle('hidden', !isPlaying);
+                badge.classList.toggle('inline-flex', isPlaying);
+            }
+            if (btn) {
+                btn.innerHTML = isPlaying
+                    ? '<i class="fa-solid fa-pause text-xs"></i>'
+                    : '<i class="fa-solid fa-volume-high text-xs"></i>';
+                btn.classList.toggle('bg-gold-500', isPlaying);
+                btn.classList.toggle('text-obsidian', isPlaying);
+                btn.classList.toggle('bg-obsidian/80', !isPlaying);
+                btn.classList.toggle('text-gold-400', !isPlaying);
+            }
+        }
+
+        audioPlayer.addEventListener('ended', () => {
+            if (currentPlayingId) {
+                updateAudioUI(currentPlayingId, false);
+                currentPlayingId = null;
+            }
+        });
+
+        // Kartları Oluşturma Fonksiyonu
+        function renderArtists(filterText = '') {
+            const query = filterText.toLowerCase().trim();
+            const filtered = artists.filter(artist => 
+                artist.name.toLowerCase().includes(query) || 
+                artist.handle.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-charcoal/50 rounded-2xl border border-white/5">
+                        <p class="text-zinc-400 text-sm">"${filterText}" aramasına uygun solist bulunamadı.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(artist => `
+                <div 
+                    class="artist-card group rounded-2xl bg-charcoal border border-white/10 overflow-hidden flex flex-col justify-between"
+                    onmouseenter="playArtistPreview('${artist.id}')"
+                    onmouseleave="stopArtistPreview('${artist.id}')"
+                >
+                    <!-- Solist Portre Görsel Alanı -->
+                    <div class="relative h-64 sm:h-72 w-full bg-gradient-to-br from-zinc-900 via-[#1b1815] to-obsidian overflow-hidden">
+                        <img 
+                            src="${artist.photo}" 
+                            alt="${artist.name}" 
+                            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <!-- Fotoğraf Henüz Eklenmediğinde Görünecek Prestijli Sahne Portresi -->
+                        <div class="hidden absolute inset-0 flex-col items-center justify-center bg-gradient-to-b from-zinc-900/90 via-[#191612] to-obsidian p-4 text-center">
+                            <div class="w-20 h-20 rounded-full border-2 border-gold-500/40 bg-gold-500/10 flex items-center justify-center shadow-lg shadow-gold-500/10 mb-3">
+                                <span class="font-serif text-2xl font-bold gold-text-gradient">${getInitials(artist.name)}</span>
+                            </div>
+                            <span class="text-[10px] tracking-[0.2em] uppercase text-gold-400/70">Solist Portresi</span>
+                        </div>
+
+                        <!-- Alt Kısım Karartma Geçişi ve Rozetler -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/25 to-transparent pointer-events-none"></div>
+                        
+                        <div class="absolute top-3.5 left-3.5 flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-obsidian/80 backdrop-blur-md border border-gold-500/30 font-serif text-xs font-bold text-gold-400">
+                                #${artist.id}
+                            </span>
+                            <!-- Müzik Çalıyor Ekolayzer Göstergesi -->
+                            <span id="eq-badge-${artist.id}" class="hidden items-end gap-0.5 h-6 px-2.5 py-1.5 rounded-lg bg-obsidian/85 backdrop-blur-md border border-gold-500/40">
+                                <span class="w-0.5 bg-gold-400 rounded-full eq-1"></span>
+                                <span class="w-0.5 bg-gold-400 rounded-full eq-2"></span>
+                                <span class="w-0.5 bg-gold-400 rounded-full eq-3"></span>
+                            </span>
+                        </div>
+
+                        <!-- Sağ Üst Instagram ve Ses Önizleme Butonları -->
+                        <div class="absolute top-3.5 right-3.5 flex items-center gap-2">
+                            <button 
+                                type="button"
+                                id="play-btn-${artist.id}"
+                                onclick="toggleArtistPreview(event, '${artist.id}')"
+                                aria-label="${artist.name} şarkı önizlemesini dinle"
+                                title="Ses kesitini dinle / durdur"
+                                class="w-9 h-9 rounded-full bg-obsidian/80 backdrop-blur-md border border-gold-500/35 flex items-center justify-center text-gold-400 hover:bg-gold-500 hover:text-obsidian transition-all"
+                            >
+                                <i class="fa-solid fa-volume-high text-xs"></i>
+                            </button>
+                            <a href="${artist.url}" target="_blank" rel="noopener noreferrer" aria-label="${artist.name} Instagram" class="w-9 h-9 rounded-full bg-obsidian/80 backdrop-blur-md border border-white/15 flex items-center justify-center text-zinc-200 hover:bg-gold-500 hover:text-obsidian hover:border-gold-500 transition-all">
+                                <i class="fa-brands fa-instagram text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Solist Bilgi ve Aksiyon Alanı -->
+                    <div class="p-5 pt-2 flex flex-col justify-between flex-1">
+                        <div>
+                            <h3 class="text-xl font-serif font-semibold text-white group-hover:text-gold-300 transition-colors">${artist.name}</h3>
+                            <p class="text-xs text-zinc-400 mt-1">${artist.handle}</p>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-t border-white/5 flex items-center gap-2.5">
+                            <a href="${artist.url}" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white/5 hover:bg-gold-500 hover:text-obsidian text-zinc-200 text-xs font-semibold transition-all">
+                                <i class="fa-brands fa-instagram text-sm"></i>
+                                <span>Instagram Profili</span>
+                            </a>
+                            <a href="#iletisim" onclick="selectArtistForBooking('${artist.name}')" class="py-2.5 px-3.5 rounded-xl border border-gold-500/30 text-gold-400 hover:bg-gold-500/15 text-xs font-medium transition-all" title="Bu solist için sahne talebi oluştur">
+                                Sahne Talebi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // İlk Yükleme
+        renderArtists();
+
+        // Canlı Arama Dinleyicisi
+        searchInput.addEventListener('input', (e) => {
+            renderArtists(e.target.value);
+        });
+
+        // Karttan "Sahne Talebi" tıklandığında formda ilgili solisti seç
+        function selectArtistForBooking(artistName) {
+            const selectEl = document.getElementById('selected-artist');
+            for (let option of selectEl.options) {
+                if (option.value === artistName) {
+                    selectEl.value = artistName;
+                    break;
+                }
+            }
+        }
+
+        // Rezervasyon Formu -> WhatsApp Yönlendirme
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('sender-name').value.trim();
+            const phone = document.getElementById('sender-phone').value.trim();
+            const artist = document.getElementById('selected-artist').value;
+            const date = document.getElementById('event-date').value.trim() || 'Belirtilmedi';
+            const notes = document.getElementById('event-notes').value.trim() || 'Belirtilmedi';
+
+            const message = `Merhaba Aylin Hanım, web siteniz üzerinden sahne talebi oluşturmak istiyorum.\n\n` +
+                            `• *Ad / Kurum:* ${name}\n` +
+                            `• *Telefon:* ${phone}\n` +
+                            `• *Talep Edilen Solist:* ${artist}\n` +
+                            `• *Tarih / Şehir:* ${date}\n` +
+                            `• *Notlar:* ${notes}`;
+
+            const whatsappUrl = `https://wa.me/905422240045?text=${encodeURIComponent(message)}`;
+            
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            this.reset();
+            setTimeout(() => feedback.classList.add('hidden'), 6000);
+        });
+    </script>
+</body>
+</html>
