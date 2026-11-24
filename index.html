@@ -424,25 +424,39 @@
         const searchInput = document.getElementById('artist-search');
         const audioPlayer = document.getElementById('artist-audio-player');
         let currentPlayingId = null;
+        let fadeInterval = null;
 
         // Sanatçı adından baş harfleri çıkaran yardımcı fonksiyon
         function getInitials(name) {
             return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
         }
 
-        // Ses Çalma / Durdurma Kontrolleri
+        // Ses Çalma / Durdurma Kontrolleri (Yumuşak giriş ve %35 ideal ses seviyesi)
         function playArtistPreview(artistId) {
             const artist = artists.find(a => a.id === artistId);
             if (!artist || !artist.audio) return;
 
+            clearInterval(fadeInterval);
+
             if (currentPlayingId !== artistId) {
                 audioPlayer.src = artist.audio;
-                audioPlayer.volume = 0.65;
             }
+
+            const targetVolume = 0.35; // Kulağı yormayan dengeli ses seviyesi
+            audioPlayer.volume = 0.05;
 
             audioPlayer.play().then(() => {
                 currentPlayingId = artistId;
                 updateAudioUI(artistId, true);
+
+                // Sesin aniden patlamaması için yumuşak yükseliş (fade-in)
+                fadeInterval = setInterval(() => {
+                    if (audioPlayer.volume < targetVolume) {
+                        audioPlayer.volume = Math.min(targetVolume, +(audioPlayer.volume + 0.05).toFixed(2));
+                    } else {
+                        clearInterval(fadeInterval);
+                    }
+                }, 45);
             }).catch(() => {
                 // Tarayıcı ilk tıklamadan önce otomatik çalmayı engellerse sessizce yoksay
             });
@@ -450,6 +464,7 @@
 
         function stopArtistPreview(artistId) {
             if (currentPlayingId === artistId) {
+                clearInterval(fadeInterval);
                 audioPlayer.pause();
                 audioPlayer.currentTime = 0;
                 updateAudioUI(artistId, false);
