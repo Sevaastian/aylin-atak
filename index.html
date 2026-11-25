@@ -54,6 +54,22 @@
         .stage-glow {
             background: radial-gradient(circle at 50% 0%, rgba(207, 160, 66, 0.16) 0%, rgba(10, 10, 12, 0) 68%);
         }
+        /* Gala Sahne Kemeri ve Altın Parçacık Arka Planı */
+        .hero-stage-backdrop {
+            background-image: 
+                radial-gradient(circle at 50% 18%, rgba(243, 217, 155, 0.22) 0%, rgba(207, 160, 66, 0.08) 32%, rgba(10, 10, 12, 0.94) 76%),
+                linear-gradient(180deg, rgba(10, 10, 12, 0.45) 0%, rgba(10, 10, 12, 0.72) 60%, #0a0a0c 100%),
+                url('images/sahne-bg.jpg');
+            background-size: cover;
+            background-position: center top;
+        }
+        @keyframes float-sparkle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
+            50% { transform: translateY(-14px) scale(1.2); opacity: 0.9; }
+        }
+        .sparkle-dot {
+            animation: float-sparkle 4s ease-in-out infinite;
+        }
         .artist-card {
             transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -99,9 +115,12 @@
 
                 <!-- Hızlı Aksiyon Butonu -->
                 <div class="flex items-center gap-3">
+                    <button type="button" onclick="openAdminGate()" title="Aylin Hanım Yönetim Paneli" class="w-9 h-9 rounded-full bg-white/[0.04] border border-white/10 hover:border-gold-500/50 text-zinc-400 hover:text-gold-400 flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                    </button>
                     <a href="#solistlerimiz" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-gold-500/40 text-gold-300 hover:bg-gold-500 hover:text-obsidian transition-all">
                         <i class="fa-solid fa-star text-[10px]"></i>
-                        <span>09 Solistimiz</span>
+                        <span id="header-artist-count">09 Solistimiz</span>
                     </a>
                     <a href="#iletisim" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gold-500 text-obsidian hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20">
                         <span>Sahne Talebi</span>
@@ -111,20 +130,72 @@
         </div>
     </header>
 
-    <!-- Hero (Giriş) Bölümü -->
-    <section class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 stage-glow border-b border-white/5">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-gold-500/25 text-gold-300 text-xs tracking-[0.2em] uppercase mb-6">
+    <!-- Hero (Giriş) Bölümü - Gala Sahne Kemeri & Altın Spot Işıkları -->
+    <section class="relative pt-32 pb-24 sm:pt-44 sm:pb-32 hero-stage-backdrop border-b border-white/5 overflow-hidden">
+        <!-- SVG Sahne Kemeri, Spot Işıkları ve Altın Konfeti Katmanı (images/sahne-bg.jpg olmasa bile kusursuz görünür) -->
+        <div class="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+            <svg viewBox="0 0 1440 760" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full object-cover opacity-80">
+                <defs>
+                    <radialGradient id="topSpot" cx="50%" cy="6%" r="55%">
+                        <stop offset="0%" stop-color="#fff4d4" stop-opacity="0.75"/>
+                        <stop offset="22%" stop-color="#cfa042" stop-opacity="0.28"/>
+                        <stop offset="100%" stop-color="#0a0a0c" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="archGold" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#8c621c" stop-opacity="0.3"/>
+                        <stop offset="50%" stop-color="#f7e4b5" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="#8c621c" stop-opacity="0.3"/>
+                    </linearGradient>
+                    <linearGradient id="stageFloor" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#2b2111" stop-opacity="0.65"/>
+                        <stop offset="100%" stop-color="#0a0a0c" stop-opacity="0.98"/>
+                    </linearGradient>
+                </defs>
+                <!-- Tepe Spot Işığı -->
+                <rect width="1440" height="760" fill="url(#topSpot)"/>
+                <!-- Işık Huzmeleri -->
+                <polygon points="720,30 340,760 540,760" fill="#f3d99b" opacity="0.04"/>
+                <polygon points="720,30 900,760 1100,760" fill="#f3d99b" opacity="0.04"/>
+                <polygon points="720,30 620,760 820,760" fill="#fff3cf" opacity="0.06"/>
+                <!-- Sol ve Sağ Spot Noktaları -->
+                <circle cx="190" cy="180" r="8" fill="#f7e4b5" opacity="0.55"/>
+                <circle cx="165" cy="275" r="9" fill="#f7e4b5" opacity="0.65"/>
+                <circle cx="145" cy="375" r="10" fill="#f7e4b5" opacity="0.55"/>
+                <circle cx="1250" cy="180" r="8" fill="#f7e4b5" opacity="0.55"/>
+                <circle cx="1275" cy="275" r="9" fill="#f7e4b5" opacity="0.65"/>
+                <circle cx="1295" cy="375" r="10" fill="#f7e4b5" opacity="0.55"/>
+                <!-- Altın Gala Kemeri -->
+                <path d="M 350 620 L 350 370 A 370 310 0 0 1 1090 370 L 1090 620" stroke="url(#archGold)" stroke-width="4" opacity="0.75"/>
+                <path d="M 374 620 L 374 375 A 346 286 0 0 1 1066 375 L 1066 620" stroke="url(#archGold)" stroke-width="1.5" opacity="0.45"/>
+                <!-- Sol ve Sağ Sütun Silüetleri -->
+                <rect x="295" y="250" width="76" height="375" rx="4" fill="#121114" stroke="#cfa042" stroke-opacity="0.32" stroke-width="1.5"/>
+                <rect x="1069" y="250" width="76" height="375" rx="4" fill="#121114" stroke="#cfa042" stroke-opacity="0.32" stroke-width="1.5"/>
+                <!-- Sahne Platformu ve Zemin Yansıması -->
+                <ellipse cx="720" cy="635" rx="540" ry="42" fill="#171410" stroke="#cfa042" stroke-opacity="0.35" stroke-width="1.5"/>
+                <ellipse cx="720" cy="650" rx="590" ry="48" fill="none" stroke="#cfa042" stroke-opacity="0.2" stroke-width="1"/>
+                <rect x="0" y="655" width="1440" height="105" fill="url(#stageFloor)"/>
+            </svg>
+            <!-- Süzülen Altın Parçacıklar -->
+            <span class="sparkle-dot absolute top-28 left-[28%] w-1.5 h-1.5 rounded-full bg-gold-300"></span>
+            <span class="sparkle-dot absolute top-40 right-[30%] w-2 h-2 rounded-full bg-gold-400" style="animation-delay: 1.1s;"></span>
+            <span class="sparkle-dot absolute top-56 left-[42%] w-1 h-1 rounded-full bg-amber-200" style="animation-delay: 2.2s;"></span>
+            <span class="sparkle-dot absolute top-36 right-[44%] w-1.5 h-1.5 rounded-full bg-gold-300" style="animation-delay: 0.7s;"></span>
+            <span class="sparkle-dot absolute top-64 left-[22%] w-1 h-1 rounded-full bg-gold-400" style="animation-delay: 1.8s;"></span>
+            <span class="sparkle-dot absolute top-60 right-[24%] w-1.5 h-1.5 rounded-full bg-amber-200" style="animation-delay: 2.8s;"></span>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-obsidian/70 backdrop-blur-md border border-gold-500/35 text-gold-300 text-xs tracking-[0.2em] uppercase mb-6 shadow-lg">
                 <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse"></span>
                 Sanatçı Yönetimi & Sahne Planlama
             </div>
             
-            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-white mb-6">
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-white mb-6 drop-shadow-[0_6px_28px_rgba(0,0,0,0.85)]">
                 Sahnenin Işığını <br class="hidden sm:block">
                 <span class="gold-text-gradient italic font-bold">Güçlü Seslerle</span> Buluşturuyoruz
             </h1>
             
-            <p class="max-w-2xl mx-auto text-zinc-400 text-base sm:text-lg leading-relaxed mb-10 font-light">
+            <p class="max-w-2xl mx-auto text-zinc-300 text-base sm:text-lg leading-relaxed mb-10 font-light drop-shadow">
                 Aylin Atak Menajerlik; seçkin solist kadrosu, gala geceleri, konserler ve özel sahne organizasyonlarıyla müziğin birleştirici gücünü en prestijli sahnelere taşır.
             </p>
 
@@ -193,7 +264,7 @@
                     
                     <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
                         <div>
-                            <span class="block font-serif text-3xl font-bold text-gold-400">09</span>
+                            <span id="about-artist-count" class="block font-serif text-3xl font-bold text-gold-400">09</span>
                             <span class="text-xs text-zinc-400">Seçkin Solist</span>
                         </div>
                         <div>
@@ -393,10 +464,146 @@
                 <a href="https://www.instagram.com/aylinatakofficial/" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 transition-colors">
                     <i class="fa-brands fa-instagram mr-1 text-gold-400"></i> @aylinatakofficial
                 </a>
+                <span class="text-zinc-700">•</span>
+                <button type="button" onclick="openAdminGate()" class="hover:text-gold-400 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders text-gold-400"></i> Yönetim Paneli
+                </button>
             </div>
             <p class="text-xs text-zinc-500 mt-4">© 2026 Aylin Atak Menajerlik & Organizasyon. Tüm hakları saklıdır.</p>
         </div>
     </footer>
+
+    <!-- YÖNETİM PANELİ GİRİŞ (PIN) PENCERESİ -->
+    <div id="admin-pin-modal" class="hidden fixed inset-0 z-[70] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="w-full max-w-sm rounded-3xl bg-charcoal border border-gold-500/30 p-7 shadow-2xl">
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-9 h-9 rounded-xl bg-gold-500/15 border border-gold-500/35 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-shield-halved text-sm"></i>
+                    </span>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold text-white">Yönetim Paneli</h3>
+                        <p class="text-[11px] text-zinc-400">Aylin Atak Menajerlik 2.0</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeAdminModals()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <form id="admin-pin-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs text-zinc-400 mb-1.5">Yönetici Şifresi (Varsayılan: <span class="text-gold-400 font-semibold">2026</span>)</label>
+                    <input type="password" id="admin-pin-input" required placeholder="••••" class="w-full px-4 py-3 rounded-xl bg-obsidian border border-white/10 text-center text-lg tracking-[0.4em] text-white focus:outline-none focus:border-gold-500">
+                    <p id="admin-pin-error" class="hidden text-xs text-rose-400 mt-2">Hatalı şifre girdiniz, lütfen tekrar deneyin.</p>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian font-semibold text-sm transition-all">
+                    Panele Giriş Yap
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AYLİN HANIM SOLİST YÖNETİM PANELİ MODALI -->
+    <div id="admin-panel-modal" class="hidden fixed inset-0 z-[70] bg-black/85 backdrop-blur-md overflow-y-auto p-4 sm:p-6">
+        <div class="max-w-5xl mx-auto my-6 rounded-3xl bg-charcoal border border-gold-500/30 shadow-2xl overflow-hidden">
+            <!-- Panel Üst Bar -->
+            <div class="px-6 py-5 bg-obsidian border-b border-white/10 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gold-500/15 border border-gold-500/40 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-white">Solist & Medya Yönetim Paneli</h3>
+                        <p class="text-xs text-zinc-400">Yeni solist ekleyin, fotoğraf veya ses kesiti yükleyin ve kadroyu düzenleyin.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <button type="button" onclick="exportUpdatedArtistsCode()" class="px-4 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/35 text-emerald-300 text-xs font-semibold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Kalıcı Liste Kodunu Kopyala</span>
+                    </button>
+                    <button type="button" onclick="closeAdminModals()" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel Bildirim Çubuğu -->
+            <div id="admin-toast" class="hidden mx-6 mt-5 p-3.5 rounded-xl bg-gold-500/15 border border-gold-500/40 text-gold-200 text-xs flex items-center justify-between">
+                <span id="admin-toast-text">İşlem başarıyla kaydedildi.</span>
+                <button type="button" onclick="this.parentElement.classList.add('hidden')" class="text-gold-300 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Sol Taraf: Yeni Solist Ekle / Düzenle Formu -->
+                <div class="lg:col-span-5 bg-obsidian/70 border border-white/10 rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 id="admin-form-title" class="font-serif text-xl font-bold text-gold-300">Yeni Solist Ekle</h4>
+                        <button type="button" id="admin-cancel-edit" onclick="resetAdminForm()" class="hidden text-xs text-zinc-400 hover:text-white underline">Vazgeç</button>
+                    </div>
+
+                    <form id="admin-artist-form" class="space-y-3.5">
+                        <input type="hidden" id="edit-artist-index" value="-1">
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Solist Adı Soyadı *</label>
+                            <input type="text" id="admin-name" required placeholder="Örn: Melis Karahan" class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-white focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Instagram Kullanıcı Adı *</label>
+                            <input type="text" id="admin-handle" required placeholder="Örn: @meliskarahanofficial" class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-white focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Instagram Profil Linki</label>
+                            <input type="url" id="admin-url" placeholder="https://www.instagram.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-white focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Fotoğraf Yükle (Cihazdan Seç)</label>
+                            <input type="file" id="admin-photo-file" accept="image/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold-500/20 file:text-gold-300 hover:file:bg-gold-500/30 cursor-pointer">
+                            <input type="text" id="admin-photo-path" placeholder="veya dosya yolu: images/solist.jpg" class="mt-2 w-full px-3.5 py-2 rounded-xl bg-charcoal border border-white/10 text-xs text-zinc-300 focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Ses Kesiti Yükle (MP3 / WAV)</label>
+                            <input type="file" id="admin-audio-file" accept="audio/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold-500/20 file:text-gold-300 hover:file:bg-gold-500/30 cursor-pointer">
+                            <input type="text" id="admin-audio-path" placeholder="veya dosya yolu: audio/solist.mp3" class="mt-2 w-full px-3.5 py-2 rounded-xl bg-charcoal border border-white/10 text-xs text-zinc-300 focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">Fotoğraf Kadraj Hizası</label>
+                            <select id="admin-pos" class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-xs text-white focus:outline-none focus:border-gold-500">
+                                <option value="object-top">Üst Odaklı (Standart Portre)</option>
+                                <option value="object-center">Tam Orta Odaklı</option>
+                                <option value="object-[center_20%]">Yüzü Biraz Yukarı Al (%20)</option>
+                                <option value="object-[center_65%]">Yüzü Biraz Aşağı Al (%65)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" id="admin-submit-btn" class="w-full py-3 px-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-obsidian font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-gold-500/20">
+                            <i class="fa-solid fa-plus mr-1.5"></i> Solisti Kadroya Ekle
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Sağ Taraf: Mevcut Solist Listesi ve Hızlı İşlemler -->
+                <div class="lg:col-span-7 flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-serif text-xl font-bold text-white">Mevcut Solist Kadrosu</h4>
+                        <button type="button" onclick="resetArtistsToDefault()" class="text-xs text-zinc-400 hover:text-rose-400 transition-colors">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Varsayılana Sıfırla
+                        </button>
+                    </div>
+                    <div id="admin-artists-list" class="space-y-2.5 max-h-[520px] overflow-y-auto pr-1">
+                        <!-- Liste dinamik dolar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Sağ Alt Köşe Sabit WhatsApp Butonu -->
     <a href="https://wa.me/905422240045?text=Merhaba%20Aylin%20Han%C4%B1m%2C%20menajerlik%20ve%20solistleriniz%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletişime geç" class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-2xl shadow-emerald-950/60 flex items-center justify-center transition-transform hover:scale-105">
@@ -407,8 +614,8 @@
     <audio id="artist-audio-player" preload="none"></audio>
 
     <script>
-        // Solist Verileri ('photo' alanına fotoğraf, 'audio' alanına MP3 ses kesiti, 'pos' alanına kadraj hizası koyabilirsiniz)
-        const artists = [
+        // Varsayılan Solist Verileri
+        const defaultArtists = [
             { id: "01", name: "Sevgim Yılmaz", handle: "@ssevgimyilmazofficial", url: "https://www.instagram.com/ssevgimyilmazofficial/", photo: "images/sevgim-yilmaz.jpg", audio: "audio/sevgim-yilmaz.mp3", pos: "object-top" },
             { id: "02", name: "Pervin Pak", handle: "@pervinpak", url: "https://www.instagram.com/pervinpak/", photo: "images/pervin-pak.jpg", audio: "audio/pervin-pak.mp3", pos: "object-top" },
             { id: "03", name: "Ömer Topçu", handle: "@omertopcuofficial", url: "https://www.instagram.com/omertopcuofficial/", photo: "images/omer-topcu.jpg", audio: "audio/omer-topcu.mp3", pos: "object-[center_65%]" },
@@ -419,6 +626,11 @@
             { id: "08", name: "Cemil Yakut", handle: "@cemilyakutt", url: "https://www.instagram.com/cemilyakutt/", photo: "images/cemil-yakut.JPG", audio: "audio/cemil-yakut.mp3", pos: "object-top" },
             { id: "09", name: "Anıl Petek Diva", handle: "@anilpetek_diva", url: "https://www.instagram.com/anilpetek_diva/", photo: "images/anil-petek-diva.JPG", audio: "audio/anil-petek-diva.mp3", pos: "object-top" }
         ];
+
+        // Aktif solist listesi (Yönetim panelinden yapılan değişiklikler anında uygulanır)
+        let artists = JSON.parse(JSON.stringify(defaultArtists));
+        const ADMIN_PIN = "2026";
+        let isAdminAuthenticated = false;
 
         const grid = document.getElementById('artists-grid');
         const searchInput = document.getElementById('artist-search');
@@ -599,6 +811,202 @@
                     </div>
                 </div>
             `).join('');
+
+            syncArtistCountersAndDropdown();
+        }
+
+        // Sayaçları ve Rezervasyon Formundaki Solist Seçim Kutusunu Güncelle
+        function syncArtistCountersAndDropdown() {
+            const countStr = String(artists.length).padStart(2, '0');
+            const headerCount = document.getElementById('header-artist-count');
+            const aboutCount = document.getElementById('about-artist-count');
+            const selectEl = document.getElementById('selected-artist');
+
+            if (headerCount) headerCount.textContent = `${countStr} Solistimiz`;
+            if (aboutCount) aboutCount.textContent = countStr;
+
+            if (selectEl) {
+                const currentVal = selectEl.value;
+                selectEl.innerHTML = `<option value="Genel Bilgi / Tüm Kadro">Genel Bilgi / Tüm Kadro</option>` +
+                    artists.map(a => `<option value="${a.name}">${a.id} - ${a.name}</option>`).join('');
+                selectEl.value = currentVal || "Genel Bilgi / Tüm Kadro";
+            }
+        }
+
+        // --- YÖNETİM PANELİ FONKSİYONLARI ---
+        function openAdminGate() {
+            if (isAdminAuthenticated) {
+                document.getElementById('admin-panel-modal').classList.remove('hidden');
+                renderAdminArtistsList();
+            } else {
+                document.getElementById('admin-pin-input').value = '';
+                document.getElementById('admin-pin-error').classList.add('hidden');
+                document.getElementById('admin-pin-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminModals() {
+            document.getElementById('admin-pin-modal').classList.add('hidden');
+            document.getElementById('admin-panel-modal').classList.add('hidden');
+        }
+
+        function showAdminToast(msg) {
+            const toast = document.getElementById('admin-toast');
+            document.getElementById('admin-toast-text').textContent = msg;
+            toast.classList.remove('hidden');
+        }
+
+        document.getElementById('admin-pin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entered = document.getElementById('admin-pin-input').value.trim();
+            if (entered === ADMIN_PIN) {
+                isAdminAuthenticated = true;
+                document.getElementById('admin-pin-modal').classList.add('hidden');
+                document.getElementById('admin-panel-modal').classList.remove('hidden');
+                renderAdminArtistsList();
+            } else {
+                document.getElementById('admin-pin-error').classList.remove('hidden');
+            }
+        });
+
+        function renderAdminArtistsList() {
+            const listEl = document.getElementById('admin-artists-list');
+            listEl.innerHTML = artists.map((artist, idx) => `
+                <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-obsidian border border-white/10 hover:border-gold-500/35 transition-colors">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="px-2 py-1 rounded-lg bg-gold-500/15 text-gold-400 font-serif text-xs font-bold">#${artist.id}</span>
+                        <img src="${artist.photo}" alt="${artist.name}" class="w-10 h-10 rounded-full object-cover border border-gold-500/30 bg-zinc-800" onerror="this.style.opacity='0.3'">
+                        <div class="min-w-0">
+                            <div class="text-sm font-semibold text-white truncate">${artist.name}</div>
+                            <div class="text-[11px] text-zinc-400 truncate">${artist.handle} • ${artist.audio ? 'Ses Yüklü' : 'Ses Yok'}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button type="button" onclick="editArtistInAdmin(${idx})" class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-gold-500/20 text-zinc-200 hover:text-gold-300 text-xs transition-colors" title="Düzenle">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" onclick="deleteArtistInAdmin(${idx})" class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 text-zinc-400 hover:text-rose-400 text-xs transition-colors" title="Sil">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editArtistInAdmin(index) {
+            const artist = artists[index];
+            if (!artist) return;
+
+            document.getElementById('edit-artist-index').value = index;
+            document.getElementById('admin-name').value = artist.name;
+            document.getElementById('admin-handle').value = artist.handle;
+            document.getElementById('admin-url').value = artist.url;
+            document.getElementById('admin-photo-path').value = artist.photo.startsWith('data:') ? '' : artist.photo;
+            document.getElementById('admin-audio-path').value = artist.audio.startsWith('data:') ? '' : artist.audio;
+            document.getElementById('admin-pos').value = artist.pos || 'object-top';
+
+            document.getElementById('admin-form-title').textContent = `${artist.name} Düzenleniyor`;
+            document.getElementById('admin-submit-btn').innerHTML = '<i class="fa-solid fa-check mr-1.5"></i> Değişiklikleri Kaydet';
+            document.getElementById('admin-cancel-edit').classList.remove('hidden');
+        }
+
+        function resetAdminForm() {
+            document.getElementById('admin-artist-form').reset();
+            document.getElementById('edit-artist-index').value = -1;
+            document.getElementById('admin-form-title').textContent = 'Yeni Solist Ekle';
+            document.getElementById('admin-submit-btn').innerHTML = '<i class="fa-solid fa-plus mr-1.5"></i> Solisti Kadroya Ekle';
+            document.getElementById('admin-cancel-edit').classList.add('hidden');
+        }
+
+        function deleteArtistInAdmin(index) {
+            const removed = artists[index];
+            artists.splice(index, 1);
+            artists.forEach((a, i) => a.id = String(i + 1).padStart(2, '0'));
+            renderArtists(searchInput.value);
+            renderAdminArtistsList();
+            showAdminToast(`"${removed.name}" kadrodan kaldırıldı.`);
+        }
+
+        function resetArtistsToDefault() {
+            artists = JSON.parse(JSON.stringify(defaultArtists));
+            resetAdminForm();
+            renderArtists(searchInput.value);
+            renderAdminArtistsList();
+            showAdminToast('Solist kadrosu varsayılan listeye sıfırlandı.');
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.getElementById('admin-artist-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const editIdx = parseInt(document.getElementById('edit-artist-index').value, 10);
+            const name = document.getElementById('admin-name').value.trim();
+            let handle = document.getElementById('admin-handle').value.trim();
+            if (!handle.startsWith('@')) handle = '@' + handle;
+            const cleanUsername = handle.replace('@', '');
+            const url = document.getElementById('admin-url').value.trim() || `https://www.instagram.com/${cleanUsername}/`;
+            const pos = document.getElementById('admin-pos').value;
+
+            const photoFile = document.getElementById('admin-photo-file').files[0];
+            const audioFile = document.getElementById('admin-audio-file').files[0];
+            let photoSrc = document.getElementById('admin-photo-path').value.trim();
+            let audioSrc = document.getElementById('admin-audio-path').value.trim();
+
+            if (photoFile) {
+                photoSrc = await readFileAsDataURL(photoFile);
+            } else if (!photoSrc && editIdx >= 0) {
+                photoSrc = artists[editIdx].photo;
+            } else if (!photoSrc) {
+                photoSrc = `images/${cleanUsername}.jpg`;
+            }
+
+            if (audioFile) {
+                audioSrc = await readFileAsDataURL(audioFile);
+            } else if (!audioSrc && editIdx >= 0) {
+                audioSrc = artists[editIdx].audio;
+            } else if (!audioSrc) {
+                audioSrc = `audio/${cleanUsername}.mp3`;
+            }
+
+            if (editIdx >= 0) {
+                artists[editIdx] = { ...artists[editIdx], name, handle, url, photo: photoSrc, audio: audioSrc, pos };
+                showAdminToast(`"${name}" bilgileri güncellendi.`);
+            } else {
+                const newId = String(artists.length + 1).padStart(2, '0');
+                artists.push({ id: newId, name, handle, url, photo: photoSrc, audio: audioSrc, pos });
+                showAdminToast(`"${name}" kadroya eklendi.`);
+            }
+
+            resetAdminForm();
+            renderArtists(searchInput.value);
+            renderAdminArtistsList();
+        });
+
+        function exportUpdatedArtistsCode() {
+            const cleanExport = artists.map(a => ({
+                id: a.id,
+                name: a.name,
+                handle: a.handle,
+                url: a.url,
+                photo: a.photo.startsWith('data:') ? `images/${a.handle.replace('@', '')}.jpg` : a.photo,
+                audio: a.audio.startsWith('data:') ? `audio/${a.handle.replace('@', '')}.mp3` : a.audio,
+                pos: a.pos || 'object-top'
+            }));
+            const codeText = `const defaultArtists = ${JSON.stringify(cleanExport, null, 4)};`;
+            const tempArea = document.createElement('textarea');
+            tempArea.value = codeText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+            showAdminToast('Güncel solist listesi kodu panoya kopyalandı!');
         }
 
         // İlk Yükleme
